@@ -279,6 +279,7 @@ class App extends Component {
               </div>
               <div className="searchBoxContainer">
                 {/* TODO Insert here the search box */}
+                <SearchBox />
               </div>
               <div className="orderBy">
                 <form>
