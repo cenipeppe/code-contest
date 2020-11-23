@@ -5,10 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faSearch);
-const noop = (e) => {
-  //Prevenire la ricarica della pagina
-  e.preventDefault()
-}
+const noop = () => {}
 export const SearchContainer = styled.form`
   box-sizing: border-box;
   display: flex;

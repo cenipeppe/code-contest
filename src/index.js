@@ -29,11 +29,6 @@ class App extends Component {
       : this.state.listUsers;
   }
 
-  handleSearch(e) {
-    this.setState({
-      searchValue: e.target.value
-    })
-  }
 
   checkChat = () => {
     setInterval(() => {
@@ -285,11 +280,13 @@ class App extends Component {
               </div>
               <div className="searchBoxContainer">
                 {/* TODO Insert here the search box */}
-                <SearchBox 
-                  placeholder="Cerca in chat" 
-                  value={this.state.searchValue} 
-                  onChange={() => this.handleSearch()}
-                  onSubmit={() => this.searchUser()} 
+                <SearchBox
+                  placeholder="Seach User"
+                  onChange={e => this.setState({ searchValue: e.target.value })}
+                  value={this.state.searchValue}
+                  onSubmit={e => {
+                    e.preventDefault();
+                  }}
                 />
               </div>
               <div className="orderBy">
@@ -302,8 +299,22 @@ class App extends Component {
                   .filter(user => user.username !== this.state.user)
                   .map((user, i) => {
                     {/* TODO Insert here the chat preview */}
-                    {/* <ChatPreview key={user.username}onClick /> */}
-                    return null;
+                    const {name, image, badge, lastMessage, status, active, infoPreview} = user;
+                    return(
+                      <ChatPreview 
+                        key={name}
+                        title={name}
+                        image={image}
+                        badge={badge}
+                        lastMessage={lastMessage}
+                        status={status}
+                        active={active}
+                        infoPreview={infoPreview}
+                        onClick={console.log('ciao')
+                    }
+                    />
+                    )
+                    
                   })}
               </div>
             </div>
