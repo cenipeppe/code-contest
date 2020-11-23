@@ -29,6 +29,12 @@ class App extends Component {
       : this.state.listUsers;
   }
 
+  handleSearch(e) {
+    this.setState({
+      searchValue: e.target.value
+    })
+  }
+
   checkChat = () => {
     setInterval(() => {
       if (this.state.activeUser.username) {
@@ -279,7 +285,12 @@ class App extends Component {
               </div>
               <div className="searchBoxContainer">
                 {/* TODO Insert here the search box */}
-                <SearchBox />
+                <SearchBox 
+                  placeholder="Cerca in chat" 
+                  value={this.state.searchValue} 
+                  onChange={() => this.handleSearch()}
+                  onSubmit={() => this.searchUser()} 
+                />
               </div>
               <div className="orderBy">
                 <form>
@@ -291,6 +302,7 @@ class App extends Component {
                   .filter(user => user.username !== this.state.user)
                   .map((user, i) => {
                     {/* TODO Insert here the chat preview */}
+                    {/* <ChatPreview key={user.username}onClick /> */}
                     return null;
                   })}
               </div>
