@@ -292,6 +292,12 @@ class App extends Component {
               <div className="orderBy">
                 <form>
                   {/* TODO Insert here the order by select */}
+                  <label>Ordina la chat per: </label>
+                  <select value={this.state.orderByValue} onChange={(e)=>this.onSelectOrderBy(e.target.value)}>
+                    <option value="nameDESC">Nome (A-Z)</option>
+                    <option value="nameASC">Nome (Z-A)</option>
+                    <option value="status">Stato</option>
+                  </select>
                 </form>
               </div>
               <div className="chatList">
@@ -299,20 +305,34 @@ class App extends Component {
                   .filter(user => user.username !== this.state.user)
                   .map((user, i) => {
                     {/* TODO Insert here the chat preview */}
-                    const {name, image, badge, lastMessage, status, active, infoPreview} = user;
                     return(
-                      <ChatPreview 
-                        key={name}
-                        title={name}
-                        image={image}
-                        badge={badge}
-                        lastMessage={lastMessage}
-                        status={status}
-                        active={active}
-                        infoPreview={infoPreview}
-                        onClick={console.log('ciao')
-                    }
-                    />
+                      <ChatPreview
+                        key={i}
+                        title={user.username}
+                        lastMessage={{
+                          message:
+                            this.state.rooms[user.username] &&
+                              this.state.rooms[user.username].lastMessage
+                              ? this.state.rooms[user.username].lastMessage.msg
+                              : '',
+                          time:
+                            this.state.rooms[user.username] &&
+                              this.state.rooms[user.username].lastMessage
+                              ? this.state.rooms[user.username].lastMessage.ts
+                              : ''
+                        }}
+                        status={user.status}
+                        active={
+                          this.state.activeUser.username === user.username
+                        }
+                        onClick={() => {
+                          this.createDirectMessageChat(user.username);
+                          this.setState({
+                            activeUser: user,
+                            messageValue: ''
+                          });
+                        }}
+                      />
                     )
                     
                   })}
