@@ -357,10 +357,10 @@ class App extends Component {
                     message => {
                       {/* TODO Insert here the messages */}
                      return (<Message 
-                        key={message.ts}
+                        key={message._id}
                         message = {message.msg} 
                         dateMessage = {message.ts}
-                        received = {message.u.username!='team4'}
+                        received = {message.u.username!=this.state.username}
                       /> )
                     }
                   )}
