@@ -361,6 +361,14 @@ class App extends Component {
               {this.state.activeUser.username && (
                 <div className="sendBoxContainer">
                   {/* TODO Insert here the sendbox */}
+                  <SendBox 
+                    placeholder='Write your message here...'
+                    value={this.state.messageValue}
+                    onAttachClick
+                    onChange={(e) => {this.setState({messageValue: e.target.value})}}
+                    onMicClick
+                    onSubmit={(e) => this.callApiPostMessage(e)}
+                  />
                 </div>
               )}
             </div>

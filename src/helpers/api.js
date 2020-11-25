@@ -114,7 +114,21 @@ export class Api {
    */
   sendMessage({ userId, activeRoom, message }) {
     {/* TODO Implement post message api */}
-    return Promise.reject('Bisogna implementare la chiamata alle API')
+    return fetch(`${config.apiUri}api/v1/chat.postMessage`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Auth-Token': this.authToken,
+        'X-User-Id': userId
+      },
+      body: JSON.stringify({
+        "channel": activeRoom,
+        "message": message
+        })
+      }
+    )
+      .then(parse);
+    {/* return Promise.reject('Bisogna implementare la chiamata alle API') */}
   }
   
   /**
