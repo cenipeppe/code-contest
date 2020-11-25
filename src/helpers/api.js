@@ -113,7 +113,6 @@ export class Api {
    * @memberof Api
    */
   sendMessage({ userId, activeRoom, message }) {
-    {/* TODO Implement post message api */}
     return fetch(`${config.apiUri}api/v1/chat.postMessage`, {
       method: 'POST',
       headers: {
@@ -122,13 +121,10 @@ export class Api {
         'X-User-Id': userId
       },
       body: JSON.stringify({
-        "channel": activeRoom,
-        "message": message
-        })
-      }
-    )
-      .then(parse);
-    {/* return Promise.reject('Bisogna implementare la chiamata alle API') */}
+        roomId: activeRoom,
+        text: message
+      })
+    }).then(parse)
   }
   
   /**

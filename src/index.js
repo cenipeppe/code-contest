@@ -220,6 +220,8 @@ class App extends Component {
   };
 
   render() {
+
+
     return (
       <div className="Chat">
         {!this.state.authToken && (
@@ -354,20 +356,25 @@ class App extends Component {
                   this.state.rooms[this.state.activeUser.username].messages.map(
                     message => {
                       {/* TODO Insert here the messages */}
-                      return null;
+                     return (<Message 
+                        key={message.ts}
+                        message = {message.msg} 
+                        dateMessage = {message.ts}
+                        received = {message.u.username!='team4'}
+                      /> )
                     }
                   )}
               </div>
               {this.state.activeUser.username && (
                 <div className="sendBoxContainer">
                   {/* TODO Insert here the sendbox */}
-                  <SendBox 
-                    placeholder='Write your message here...'
+                  <SendBox
+                    placeholder="Insert Message"
+                    onChange={e =>
+                      this.setState({ messageValue: e.target.value })
+                    }
                     value={this.state.messageValue}
-                    onAttachClick
-                    onChange={(e) => {this.setState({messageValue: e.target.value})}}
-                    onMicClick
-                    onSubmit={(e) => this.callApiPostMessage(e)}
+                    onSubmit={this.callApiPostMessage}
                   />
                 </div>
               )}
